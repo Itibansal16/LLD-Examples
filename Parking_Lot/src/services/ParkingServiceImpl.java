@@ -6,6 +6,8 @@ import dto.ParkingTicket;
 import dto.exceptions.InvalidTicketException;
 import dto.exceptions.SpotNotFoundException;
 import dto.parkingSpot.ParkingSpot;
+import dto.parkingSpot.spotDecorator.Electric;
+import dto.parkingSpot.spotDecorator.WashspotDecorator;
 import dto.vehicle.Vehicle;
 import enums.ParkingEventType;
 import enums.ParkingSpotEnum;
@@ -77,6 +79,12 @@ public class ParkingServiceImpl implements ParkingService {
         notifyAllObservers(parkingEvent);
 //        displayService.update(vehicle.getParkingSpotEnum(), 1);
         return amount;
+    }
+    public void addWash(ParkingTicket parkingTicket) {
+        parkingTicket.setParkingSpot(new WashspotDecorator(parkingTicket.getParkingSpot()));
+    }
+    public void addElectric(ParkingTicket parkingTicket) {
+        parkingTicket.setParkingSpot(new Electric(parkingTicket.getParkingSpot()));
     }
     public void addObserver(Observer observer) {
         this.observers.add(observer);

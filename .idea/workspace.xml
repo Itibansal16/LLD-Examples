@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7803103-a713-4649-9f9e-a322cf26ff13" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Parking_Lot/src/dto/ParkingEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Parking_Lot/src/enums/ParkingEventType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Parking_Lot/src/interfaces/Observer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Parking_Lot/src/services/LoggerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parking_Lot/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parking_Lot/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parking_Lot/src/dto/vehicle/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parking_Lot/src/dto/vehicle/Vehicle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parking_Lot/src/services/DisplayServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parking_Lot/src/services/DisplayServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parking_Lot/src/dto/parkingSpot/spotDecorator/Electric.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parking_Lot/src/dto/parkingSpot/spotDecorator/SpotDecorator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parking_Lot/src/dto/parkingSpot/spotDecorator/WashspotDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parking_Lot/src/dto/parkingSpot/CompactParkingSpot.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parking_Lot/src/dto/parkingSpot/CompactParkingSpot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parking_Lot/src/dto/parkingSpot/LargeParkingSpot.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parking_Lot/src/dto/parkingSpot/LargeParkingSpot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parking_Lot/src/dto/parkingSpot/MiniParkingSpot.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parking_Lot/src/dto/parkingSpot/MiniParkingSpot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parking_Lot/src/dto/parkingSpot/ParkingSpot.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parking_Lot/src/dto/parkingSpot/ParkingSpot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Parking_Lot/src/services/ParkingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Parking_Lot/src/services/ParkingServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
