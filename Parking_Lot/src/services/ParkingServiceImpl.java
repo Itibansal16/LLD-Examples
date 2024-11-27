@@ -1,16 +1,20 @@
 package services;
 
+import dto.ParkingEvent;
 import dto.ParkingLot;
 import dto.ParkingTicket;
 import dto.exceptions.InvalidTicketException;
 import dto.exceptions.SpotNotFoundException;
 import dto.parkingSpot.ParkingSpot;
 import dto.vehicle.Vehicle;
+import enums.ParkingEventType;
 import enums.ParkingSpotEnum;
 import interfaces.DisplayService;
+import interfaces.Observer;
 import interfaces.ParkingService;
 import strategy.ParkingStrategy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingServiceImpl implements ParkingService {
@@ -18,11 +22,13 @@ public class ParkingServiceImpl implements ParkingService {
     ParkingStrategy parkingStrategy;
     ParkingLot parkingLot;
     DisplayService displayService;
+    private List<Observer> observers;
 
     public ParkingServiceImpl(ParkingStrategy parkingStrategy) {
         this.parkingStrategy = parkingStrategy;
         parkingLot = ParkingLot.getInstance();
         this.displayService = new DisplayServiceImpl();
+        this.observers = new ArrayList<>();
     }
 
     @Override
@@ -39,7 +45,9 @@ public class ParkingServiceImpl implements ParkingService {
                     freeParkingSpots.remove(parkingSpot);
                     occupiedParkingSpots.add(parkingSpot);
                     ParkingTicket parkingTicket = new ParkingTicket(vehicle, parkingSpot);
-                    displayService.update(parkingSpotEnum, -1);
+                    ParkingEvent parkingEvent = new ParkingEvent(ParkingEventType.ENTRY, parkingSpotEnum, vehicle);
+                    notifyAllObservers(parkingEvent);
+//                    displayService.update(parkingSpotEnum, -1);
                     System.out.println("Generating ticket: " + parkingTicket);
                     return parkingTicket;
                 }
@@ -65,10 +73,20 @@ public class ParkingServiceImpl implements ParkingService {
         parkingSpot.setIsFree(true);
         parkingLot.getOccupiedParkingSpots().get(vehicle.getParkingSpotEnum()).remove(parkingSpot);
         sortedInsert(parkingLot.getFreeParkingSpots().get(vehicle.getParkingSpotEnum()), parkingSpot);
-        displayService.update(vehicle.getParkingSpotEnum(), 1);
+        ParkingEvent parkingEvent = new ParkingEvent(ParkingEventType.EXIT, vehicle.getParkingSpotEnum(), vehicle);
+        notifyAllObservers(parkingEvent);
+//        displayService.update(vehicle.getParkingSpotEnum(), 1);
         return amount;
     }
+    public void addObserver(Observer observer) {
+        this.observers.add(observer);
+    }
 
+    public void notifyAllObservers(ParkingEvent parkingEvent) {
+        for(Observer observer : this.observers) {
+            observer.update(parkingEvent);
+        }
+    }
     private void sortedInsert(List<ParkingSpot> parkingSpots, ParkingSpot parkingSpot) {
         int left = 0, right = parkingSpots.size();
         while(left < right) {

@@ -12,6 +12,7 @@ import interfaces.DisplayService;
 import interfaces.ParkingService;
 import interfaces.ParkingSpotService;
 import services.DisplayServiceImpl;
+import services.LoggerService;
 import services.ParkingServiceImpl;
 import services.ParkingSpotServiceImpl;
 import strategy.NearestFirstParkingStrategy;
@@ -43,7 +44,10 @@ public class Main {
         Vehicle car2 = new Car();
         Vehicle car3 = new Car();
         Vehicle car4 = new Car();
-        ParkingService parkingService = new ParkingServiceImpl(new NearestFirstParkingStrategy());
+        ParkingServiceImpl parkingService = new ParkingServiceImpl(new NearestFirstParkingStrategy());
+
+        parkingService.addObserver(new LoggerService());
+        parkingService.addObserver(new DisplayServiceImpl());
         try {
             ParkingTicket ticket1 = parkingService.getEntryTicket(car1);
             ParkingTicket ticket2 = parkingService.getEntryTicket(car2);
