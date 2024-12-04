@@ -18,7 +18,7 @@ public abstract class AbstractLogger {
     }
 
     protected void display(int level, String msg) {
-        String levelName = levelToNameMap.get(level);
+        String levelName = levelToNameMap.get(this.getLevel());
         System.out.println(levelName + ": " + msg);
     }
     void logMessage(int level, String msg) {
