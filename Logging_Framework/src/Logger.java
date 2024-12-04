@@ -4,6 +4,7 @@ import java.util.Objects;
 public class Logger {
     private static Logger logger;
     private static AbstractLogger abstractLoggerChain;
+    private static LogSubject logSubject;
     private Logger() {}
     public static Logger getInstance() {
         if(Objects.isNull(logger)) {
@@ -12,6 +13,7 @@ public class Logger {
                     logger = new Logger();
                     AbstractLogger.levelToNameMap = new HashMap<>();
                     abstractLoggerChain = LogManager.buildChainOfLogger();
+                    logSubject = LogManager.buildSubject();
                 }
             }
         }
@@ -20,6 +22,7 @@ public class Logger {
 
     private void createLog(int level, String msg) {
         abstractLoggerChain.logMessage(level, msg);
+        logSubject.notifyAllObservers(level, msg);
     }
 
     public void info(String msg) {
